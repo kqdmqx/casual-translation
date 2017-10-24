@@ -1,7 +1,10 @@
-原文
+原文I
+> https://medium.com/towards-data-science/top-6-errors-novice-machine-learning-engineers-make-e82273d394db
+
+原文II（来自新浪微博：爱可可-爱生活）
 > https://pan.baidu.com/s/1pL5d7uV
 
-作者
+原文作者
 > Christopher Dossman
 
 # Top 6 errors novice machine learning engineers make
