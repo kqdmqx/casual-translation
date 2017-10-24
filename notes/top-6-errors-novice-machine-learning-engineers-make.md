@@ -1,6 +1,9 @@
 原文
 > https://pan.baidu.com/s/1pL5d7uV
 
+作者
+> Christopher Dossman
+
 # Top 6 errors novice machine learning engineers make
 
 * 机器学习工程师新手常犯的六大错误
@@ -145,12 +148,28 @@ The more features the data set has the more likely the features are co-linear an
 * 很多新手机器学习工程师认为，这项系数越大，这个特征越重要。
 * 因为参数的数值范围影响系数的绝对值，所以这个观点基本不正确。
 * 若特征之间有线性相关性，则系数可能从一向特征转移到另一项。
-* 数据集的特征数量越多，则特征间有线性相关性的可能性越大，简单讲系数作为特征重要性的理解就越不靠谱。
+* 数据集的特征数量越多，则特征间有线性相关性的可能性越大，简单地把系数作为特征重要性的理解就越不靠谱。
 
 
 **Take Away**: Understanding what features are most important to a result is important, but don’t assume that you can look at the coefficients.They often don’t tell the whole story.
 
-* 理解特征重要性很重要，但不可假设直接看这些系数。
-* 这些系数通常无法传达全面信息。
+* 理解特征重要性很重要，但不可假设直接看这些（线性模型的）系数。
+* 这些系数通常无法传达全面的信息（受到特征数值和特征间线性相关性等因素影响，而不是单纯反映单特征的信息量）。
+
+## 小结
+
+Doing a few projects and getting good results can feel like winning a million bucks.
+You worked hard and you have the results to prove that you did a good job,
+but just like with any other industry the devil is in the details and even fancy plots can hide bias and error.
+This list is not meant to be exhaustive, but merely to cause the reader to think about all the small issues that might be hiding in your solution.
+In order to achieve good results, it is important to follow your process and always double check that you are not making some common mistakes.
+
+* 做一些项目、得到好的结果，会感觉不错。
+* 付出努力，且有结果证明工作的价值。
+* 然而，和其他很多产业同样，恶魔藏在细节中，看起来很棒的图表中可能藏着偏差和错误。
+* 此列表并不旨在详尽无遗，仅是希望引起读者考虑“你的答案中可能隐藏着种种细小的问题”。
+* 为了得到好的结果，反复检查实验过程，确认常见错误是否存在很重要。
 
 
+If you found this article useful you will get a lot out of my **Becoming a machine learning engineer | Step 2: Picking a Process article.**
+It helps you iron out a process that will allow you to catch more simple mistakes and get better results.
