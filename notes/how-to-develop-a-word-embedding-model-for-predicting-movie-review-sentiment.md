@@ -5,6 +5,7 @@ by Jason Brownlee on October 30, 2017 in Natural Language Processing
 ***
 
 Word embeddings are a technique for representing text where different words with similar meaning have a similar real-valued vector representation.
+
 They are a key breakthrough that has led to great performance of neural network models on a suite of challenging natural language processing problems.
 
 * 词嵌入是一种用来用实数向量表示文本的技术。
