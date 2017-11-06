@@ -76,7 +76,17 @@ The data has been cleaned up somewhat, for example:
 * There is white space around punctuation like periods, commas, and brackets.
 * Text has been split into one sentence per line.
 
+
+* 数据集已经被使用一些方法清洗，比如：
+    * 数据集仅由英文影评组成。
+    * 全部文本被转化为小写。
+    * 在标点符号前后由空格隔开。
+    * 文本被切分为每行一句。
+
 The data has been used for a few related natural language processing tasks. For classification, the performance of machine learning models (such as Support Vector Machines) on the data is in the range of high 70% to low 80% (e.g. 78%-82%).
+
+* 此数据被用于一些相关的自然语言处理任务。
+* 在分类任务中，分类器的性能为78%-82%。（准确率？）
 
 More sophisticated data preparation may see results as high as 86% with 10-fold cross validation. This gives us a ballpark of low-to-mid 80s if we were looking to use this dataset in experiments of modern methods.
 
@@ -90,6 +100,54 @@ You can download the dataset from here:
 * [Movie Review Polarity Dataset][2] (review_polarity.tar.gz, 3MB)
 [2]: http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
 
+* 更细致的数据准备后，可以在10折交叉验证中得到86%。（准确率？）
+* ？
+
 After unzipping the file, you will have a directory called “txt_sentoken” with two sub-directories containing the text “neg” and “pos” for negative and positive reviews. Reviews are stored one per file with a naming convention cv000 to cv999 for each neg and pos.
 
 Next, let’s look at loading and preparing the text data.
+
+* 解压文件后，可以看到一个目录**txt_sentoken**。
+* 其中有两个目录**neg**、**pos**，分别包含影评的正例负例。
+* 每个正例或负例样本一个文件，文件名从cv000到cv999。
+* 接了下来，加载和准备这些文本文件。
+
+## Data Preparation
+
+In this section, we will look at 3 things:
+
+1. Separation of data into training and test sets.
+2. Loading and cleaning the data to remove punctuation and numbers.
+3. Defining a vocabulary of preferred words.
+
+* 本章做三件事：
+    1. 把数据集划分为训练集和测试集。
+    2. 加载并清洗数据，去除符号和数字。
+    3. 定义**preferred words**的词汇表。
+
+### Split into Train and Test Sets
+
+We are pretending that we are developing a system that can predict the sentiment of a textual movie review as either positive or negative.
+
+* 我们假设正在开发一个可以识别一段影评文本中的情感是正面或是负面。
+
+This means that after the model is developed, we will need to make predictions on new textual reviews. This will require all of the same data preparation to be performed on those new reviews as is performed on the training data for the model.
+
+* 这意味着系统完工后会被用来识别新的影评文本。
+* 这所有在训练数据上采用的数据准备工作要同样应用在新数据上。
+
+We will ensure that this constraint is built into the evaluation of our models by splitting the training and test datasets prior to any data preparation. This means that any knowledge in the data in the test set that could help us better prepare the data (e.g. the words used) are unavailable in the preparation of data used for training the model.
+
+* 我们确保这项限制是模型验证的一部分。
+* 通过在数据预处理之前把数据集划分为训练集和测试集。
+* 在训练模型的数据准备工作中，不会用到测试集中的知识。
+
+That being said, we will use the last 100 positive reviews and the last 100 negative reviews as a test set (100 reviews) and the remaining 1,800 reviews as the training dataset.
+
+This is a 90% train, 10% split of the data.
+
+The split can be imposed easily by using the filenames of the reviews where reviews named 000 to 899 are for training data and reviews named 900 onwards are for test.
+
+* 使用最后100个正面评价，100个负面评价作为测试集；剩下1800个评价作为训练集。
+* 数据划分是90%训练10%测试。
+* 此划分可以简单的通过文件名实现，000到899的文件是训练数据900之后是测试集。
