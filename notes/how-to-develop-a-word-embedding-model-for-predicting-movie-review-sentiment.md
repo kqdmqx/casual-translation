@@ -151,3 +151,85 @@ The split can be imposed easily by using the filenames of the reviews where revi
 * 使用最后100个正面评价，100个负面评价作为测试集；剩下1800个评价作为训练集。
 * 数据划分是90%训练10%测试。
 * 此划分可以简单的通过文件名实现，000到899的文件是训练数据900之后是测试集。
+
+
+### Loading and Cleaning Reviews
+
+The text data is already pretty clean; not much preparation is required.
+
+Without getting bogged down too much in the details, we will prepare the data using the following way:
+
+* Split tokens on white space.
+* Remove all punctuation from words.
+* Remove all words that are not purely comprised of alphabetical characters.
+* Remove all words that are known stop words.
+* Remove all words that have a length <= 1 character.
+
+We can put all of these steps into a function called clean_doc() that takes as an argument the raw text loaded from a file and returns a list of cleaned tokens. We can also define a function load_doc() that loads a document from file ready for use with the clean_doc() function.
+
+An example of cleaning the first positive review is listed below.
+
+* 文本数据已经相当干净；不需要更多预处理。
+* 避免过于深入细节，我们将按照以下方式准备数据：
+    * 按空格符划分。
+    * 去除标点。
+    * 去除不是纯英文字母组成的单词。
+    * 去除停用词。
+    * 去除长度小于等于1个字母的单词。
+* 定义clean_doc()函数，包含以上步骤；输入文件中读取的纯文本，输出清理后的**token**列表。
+* 定义load_doc()函数，读取文本文件，作为clean_doc()函数的输入。
+* 下面是个清理第一个正例文件的例子。
+
+```python
+from nltk.corpus import stopwords
+import string
+
+# load doc into memory
+def load_doc(filename):
+    # open the file as read only
+    file = open(filename, 'r')
+    # read all text
+    text = file.read()
+    # close the file
+    file.close()
+    return text
+
+# turn a doc into clean tokens
+def clean_doc(doc):
+    # split into tokens by white space
+    tokens = doc.split()
+    # remove punctuation from each token
+    table = str.maketrans('', '', string.punctuation)
+    tokens = [w.translate(table) for w in tokens]
+    # remove remaining tokens that are not alphabetic
+    tokens = [word for word in tokens if word.isalpha()]
+    # filter out stop words
+    stop_words = set(stopwords.words('english'))
+    tokens = [w for w in tokens if not w in stop_words]
+    # filter out short tokens
+    tokens = [word for word in tokens if len(word) > 1]
+    return tokens
+
+# load the document
+filename = 'txt_sentoken/pos/cv000_29590.txt'
+text = load_doc(filename)
+tokens = clean_doc(text)
+print(tokens)
+```
+
+Running the example prints a long list of clean tokens.
+
+There are many more cleaning steps we may want to explore and I leave them as further exercises.
+
+I’d love to see what you can come up with.
+Post your approaches and findings in the comments at the end.
+
+* 运行示例脚本，打印一个长长的**clean token**列表。
+* 更多的数据清洗步骤留到之后的实践中。
+* 尝试并分享你的结果。
+
+```python
+...
+'creepy', 'place', 'even', 'acting', 'hell', 'solid', 'dreamy', 'depp', 'turning', 'typically', 'strong', 'performance', 'deftly', 'handling', 'british', 'accent', 'ians', 'holm', 'joe', 'goulds', 'secret', 'richardson', 'dalmatians', 'log', 'great', 'supporting', 'roles', 'big', 'surprise', 'graham', 'cringed', 'first', 'time', 'opened', 'mouth', 'imagining', 'attempt', 'irish', 'accent', 'actually', 'wasnt', 'half', 'bad', 'film', 'however', 'good', 'strong', 'violencegore', 'sexuality', 'language', 'drug', 'content']
+```
+
