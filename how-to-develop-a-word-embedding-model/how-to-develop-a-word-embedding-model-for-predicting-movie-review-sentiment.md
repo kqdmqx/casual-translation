@@ -940,10 +940,10 @@ We can then load all of the training data and convert it into a long list of ‘
 * 我们现在可以读取所有训练集数据，并且把它变成一个由句子（list of tokens）组成的长列表，用来训练word2vec模型。
 
 ```python
-# load training data
+# load training data, @Fixed
 positive_lines = process_docs('txt_sentoken/pos', vocab, True)
 negative_lines = process_docs('txt_sentoken/neg', vocab, True)
-sentences = negative_docs + positive_docs
+sentences = positive_lines + negative_lines
 print('Total training sentences: %d' % len(sentences))
 ```
 
@@ -1034,10 +1034,10 @@ vocab = load_doc(vocab_filename)
 vocab = vocab.split()
 vocab = set(vocab)
 
-# load training data
+# load training data, @Fixed
 positive_lines = process_docs('txt_sentoken/pos', vocab, True)
 negative_lines = process_docs('txt_sentoken/neg', vocab, True)
-sentences = negative_docs + positive_docs
+sentences = positive_lines + negative_lines
 print('Total training sentences: %d' % len(sentences))
 
 # train word2vec model
